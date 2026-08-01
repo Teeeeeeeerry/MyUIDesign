@@ -13,11 +13,13 @@
 
 ```
 MyUIDesign/
-├── tokens.css        # 设计令牌 —— 颜色、字体、圆角、间距、动画
-├── components.css    # 可复用 CSS 组件
-├── presets.css       # 视觉风格预设系统
-├── patterns.md       # 交互与架构模式（TypeScript 实现指南）
-└── README.md         # 本文件
+├── colors.css         # 配色系统 —— 色板 + 透明度阶（可独立使用）
+├── typography.css     # 字体选用 —— 字体族 + 字号阶梯 + 字重/字距（可独立使用）
+├── tokens.css         # 设计令牌入口 —— 圆角 + 间距 + 动画，聚合 colors + typography
+├── components.css     # 可复用 CSS 组件
+├── presets.css        # 视觉风格预设系统
+├── patterns.md        # 交互与架构模式（TypeScript 实现指南）
+└── README.md          # 本文件
 ```
 
 ## 快速开始
@@ -25,7 +27,12 @@ MyUIDesign/
 ### 1. 引入令牌
 
 ```html
+<!-- 一次性引入所有令牌（颜色 + 字体 + 间距 + 圆角 + 动画） -->
 <link rel="stylesheet" href="tokens.css">
+
+<!-- 或按需引入 -->
+<link rel="stylesheet" href="colors.css">
+<link rel="stylesheet" href="typography.css">
 ```
 
 ### 2. 使用组件
@@ -54,26 +61,96 @@ MyUIDesign/
 ```html
 <link rel="stylesheet" href="presets.css">
 
-<!-- 默认风格 -->
 <div class="ds-style-default">
-  <span class="ds-styled-content">Content</span>
-</div>
-
-<!-- 弱化风格 -->
-<div class="ds-style-dim">
   <span class="ds-styled-content">Content</span>
 </div>
 ```
 
-## 色板
+---
+
+## 配色系统 `colors.css`
+
+### 主色板
+
+| Token | 值 | 色样 | 用途 |
+|-------|-----|------|------|
+| `--ds-paper` | `#f5f0e6` | ██ | 底色 —— 纸感米白，页面/面板背景 |
+| `--ds-ink` | `#1f3a2e` | ██ | 主色 —— 深绿墨色，正文、主按钮、标题 |
+| `--ds-accent` | `#b89968` | ██ | 强调 —— 黄铜金，边框装饰、完成态 |
+| `--ds-surface` | `#ffffff` | ██ | 表面 —— 纯白，卡片、弹窗、输入框背景 |
+| `--ds-danger` | `#7a4030` | ██ | 危险 —— 锈红，错误提示、删除按钮 |
+
+### 透明度阶
+
+从 `--ds-ink` 派生，每个透明度只有一个语义用途。
+
+| Token | 透明度 | 用途 |
+|-------|--------|------|
+| `--ds-ink-08` | 8% | 分隔线 |
+| `--ds-ink-09` | 9% | 卡片描边 |
+| `--ds-ink-15` | 15% | 次级按钮描边、开关关闭态 |
+| `--ds-ink-22` | 22% | 输入框描边 |
+| `--ds-ink-40` | 40% | 页脚文字、占位符 |
+| `--ds-ink-55` | 55% | 次级文字、标签 |
+
+### 命名规则
+
+- 按**用途**命名，不按色相 —— `--ds-danger` 而非 `--ds-red`
+- 新增颜色前先问：这个颜色传达什么语义？无法用一个词回答 → 不该成为 token
+- 引入新色相时优先考虑：能否用现有 token 的透明度阶替代？
+
+---
+
+## 字体选用 `typography.css`
+
+### 字体族
+
+| Token | 字体栈 | 用途 |
+|-------|--------|------|
+| `--ds-font-mono` | JetBrains Mono, SF Mono, Cascadia Code, Fira Code, monospace | 标签、按钮、标题、数据、导航 |
+| `--ds-font-ui` | system-ui, -apple-system, Segoe UI, Roboto, sans-serif | 正文、描述、通知、长句 |
+
+### 选用原则
+
+- **等宽字**：需要结构感、对齐、精确性的场景 —— 按钮文字、标签、标题、代码/数据
+- **系统字**：需要阅读流畅性的场景 —— 正文段落、Toast 提示、描述文字
+- **不引入 Web Font**：零外部依赖，首屏无 FOIT/FOUT，离线可用
+
+### 字号阶梯
+
+7 档，从标签到标题全覆盖。
 
 | Token | 值 | 用途 |
 |-------|-----|------|
-| `--ds-paper` | `#f5f0e6` | 底色，纸感米白 |
-| `--ds-ink` | `#1f3a2e` | 主色，深绿墨色 |
-| `--ds-accent` | `#b89968` | 强调色，黄铜金 |
-| `--ds-surface` | `#ffffff` | 浅色卡片面 |
-| `--ds-danger` | `#7a4030` | 错误态，锈红 |
+| `--ds-text-2xs` | 7px | 标签、徽章、overline |
+| `--ds-text-xs` | 8px | 页脚、辅助信息 |
+| `--ds-text-sm` | 10px | 次级正文、placeholder |
+| `--ds-text-base` | 11px | 正文、选项标签 |
+| `--ds-text-md` | 13px | 强调正文、toast |
+| `--ds-text-lg` | 14px | 标题、面板名 |
+| `--ds-text-xl` | 16px | 大标题、Logo |
+
+### 字重 & 字距
+
+| Token | 值 | 用途 |
+|-------|-----|------|
+| `--ds-weight-normal` | 400 | 正文 |
+| `--ds-weight-bold` | 700 | 标题、按钮、标签 |
+| `--ds-tracking-tight` | -.02em | 大标题 |
+| `--ds-tracking-normal` | 0 | 正文 |
+| `--ds-tracking-wide` | .1em | 按钮 |
+| `--ds-tracking-wider` | .18em | 页脚 |
+| `--ds-tracking-widest` | .2em | 标签、overline |
+
+### 排版基类
+
+| 类 | 效果 |
+|----|------|
+| `.ds-text-label` | 全大写、宽字距、小字号、等宽加粗 —— 用于卡片标签、section header |
+| `.ds-text-body` | 系统字、常规字重、1.5 行高 —— 用于正文段落 |
+| `.ds-text-heading` | 等宽、加粗、收紧字距 —— 用于标题 |
+
+---
 
 ## 组件清单
 

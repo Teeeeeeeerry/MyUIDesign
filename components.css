@@ -1,0 +1,335 @@
+/* ============================================================
+   Components — 可复用 UI 组件
+   所有组件都基于 tokens.css 中的变量构建。
+   命名约定：ds-{组件名}，修饰符用 ds-{组件名}-{变体}。
+
+   依赖：tokens.css 需先于本文件加载。
+   ============================================================ */
+
+@import './tokens.css';
+
+/* ============================================================
+   Reset — 组件作用域内的最小重置
+   ============================================================ */
+
+[class*='ds-'],
+[class*='ds-']::before,
+[class*='ds-']::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   Card — 卡片容器
+   ============================================================ */
+
+.ds-card {
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-ink-09);
+  border-radius: var(--ds-r-md);
+  padding: var(--ds-space-4) var(--ds-space-5);
+}
+
+.ds-card-label {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-2xs);
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ds-ink-40);
+  margin-bottom: var(--ds-space-2);
+}
+
+/* ============================================================
+   Header — 页头（Logo + 标题 + 副标题）
+   ============================================================ */
+
+.ds-header {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+}
+
+.ds-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--ds-r-md);
+  background: var(--ds-ink);
+  color: var(--ds-paper);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xl);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ds-header-title {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-lg);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ds-ink);
+}
+
+.ds-header-sub {
+  font-size: var(--ds-text-xs);
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ds-ink-55);
+  font-family: var(--ds-font-mono);
+  margin-top: 1px;
+}
+
+/* ============================================================
+   Toggle — 开关
+   ============================================================ */
+
+.ds-toggle {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--ds-ink-15);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background .15s ease;
+}
+
+.ds-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ds-surface);
+  transition: transform .15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
+}
+
+.ds-toggle.ds-on {
+  background: var(--ds-ink);
+}
+
+.ds-toggle.ds-on::after {
+  transform: translateX(16px);
+}
+
+/* ============================================================
+   Select — 下拉选择
+   ============================================================ */
+
+.ds-select {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-sm);
+  color: var(--ds-ink);
+  background: var(--ds-paper);
+  border: 1px solid var(--ds-ink-22);
+  border-radius: var(--ds-r-sm);
+  padding: 3px 6px;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* ============================================================
+   Buttons — 按钮
+   ============================================================ */
+
+/* 主操作按钮 —— 实心深色 */
+.ds-btn-primary {
+  font-family: var(--ds-font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ds-paper);
+  background: var(--ds-ink);
+  border: none;
+  border-radius: var(--ds-r-sm);
+  padding: var(--ds-space-1) var(--ds-space-5);
+  cursor: pointer;
+  transition: opacity .15s ease;
+}
+
+.ds-btn-primary:hover { opacity: 0.85; }
+.ds-btn-primary:active { opacity: 0.7; }
+
+/* 次级按钮 —— 描边透明底 */
+.ds-btn-secondary {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ds-ink-55);
+  background: none;
+  border: 1px solid var(--ds-ink-15);
+  border-radius: var(--ds-r-sm);
+  padding: var(--ds-space-1) var(--ds-space-4);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+
+.ds-btn-secondary:hover {
+  background: var(--ds-ink-08);
+  color: var(--ds-ink);
+}
+
+/* ============================================================
+   Toast — 短暂提示
+   ============================================================ */
+
+.ds-toast {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  padding: var(--ds-space-3) var(--ds-space-6);
+  border-radius: var(--ds-r-sm);
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-md);
+  color: var(--ds-paper);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  animation: ds-pop-in 0.2s ease;
+  z-index: 2147483647;
+}
+
+.ds-toast[data-kind='info']  { background: var(--ds-ink); }
+.ds-toast[data-kind='error'] { background: var(--ds-danger); }
+
+/* ============================================================
+   Floating Action — 悬浮操作球
+   ============================================================ */
+
+.ds-fab {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ds-ink);
+  color: var(--ds-paper);
+  border: 1.5px solid var(--ds-accent);
+  cursor: pointer;
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-base);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(31, 58, 46, 0.3);
+  user-select: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ds-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(31, 58, 46, 0.38);
+}
+
+/* 状态变体 */
+.ds-fab[data-state='loading'] {
+  animation: ds-spin 1s linear infinite;
+  border-style: dashed;
+}
+
+.ds-fab[data-state='done'] {
+  background: var(--ds-accent);
+  border-color: var(--ds-accent);
+}
+
+.ds-fab[data-state='error'] {
+  border-color: var(--ds-danger);
+  box-shadow: 0 4px 16px rgba(122, 64, 48, 0.35);
+}
+
+/* ============================================================
+   Inline Action — 内联操作按钮（悬停浮出）
+   ============================================================ */
+
+.ds-inline-btn {
+  position: fixed;
+  display: none;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 4px 8px;
+  font-family: var(--ds-font-mono);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  border: 1px solid var(--ds-ink-15);
+  border-radius: var(--ds-r-sm);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(31, 58, 46, 0.15);
+  transition: background 0.12s ease, opacity 0.12s ease;
+}
+
+.ds-inline-btn:hover {
+  background: var(--ds-ink);
+  color: var(--ds-paper);
+}
+
+/* ============================================================
+   Option Row — 选项行（标签 + 控件）
+   ============================================================ */
+
+.ds-option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ds-option-row + .ds-option-row {
+  margin-top: var(--ds-space-2);
+}
+
+.ds-option-label {
+  font-size: var(--ds-text-base);
+  color: var(--ds-ink);
+}
+
+/* ============================================================
+   Footer — 页脚
+   ============================================================ */
+
+.ds-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--ds-space-4);
+  border-top: 1px solid var(--ds-ink-08);
+}
+
+.ds-footer-text {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-xs);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ds-ink-40);
+}
+
+/* ============================================================
+   Content Stack — 垂直内容栈
+   ============================================================ */
+
+.ds-content-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+}
+
+/* ============================================================
+   Placeholder — 占位提示
+   ============================================================ */
+
+.ds-placeholder {
+  font-size: var(--ds-text-sm);
+  color: var(--ds-ink-40);
+  font-style: italic;
+}

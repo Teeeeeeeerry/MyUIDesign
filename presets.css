@@ -1,0 +1,79 @@
+/* ============================================================
+   Visual Presets — 视觉预设系统
+
+   一种"CSS 类修饰符"模式：用一套基础结构 + 多个风格类，
+   在不改变 HTML 的前提下切换视觉表现。
+
+   适用场景：用户可在设置中选择"风格 A / B / C"，
+   每个风格对应一个 CSS 类，挂在同一个根元素上。
+
+   依赖：tokens.css 需先于本文件加载。
+   ============================================================ */
+
+@import './tokens.css';
+
+/* ============================================================
+   基础结构
+   关键：不设 font-family / font-size —— 内容应继承宿主排版
+   ============================================================ */
+
+.ds-styled-content {
+  display: block;
+}
+
+/* ============================================================
+   6 种风格预设
+   ============================================================ */
+
+/* 默认：左侧彩色细线做弱标识 */
+.ds-style-default .ds-styled-content {
+  border-left: 2px solid var(--ds-accent);
+  padding-left: 0.5em;
+}
+
+/* 弱化：平时完全不可见，悬停到容器才淡入 */
+.ds-style-dim .ds-styled-content {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.ds-style-dim [data-ds='done']:hover .ds-styled-content {
+  opacity: 1;
+}
+
+/* 实线下划线 */
+.ds-style-underline .ds-styled-content {
+  text-decoration: underline solid;
+  text-underline-offset: 3px;
+}
+
+/* 加粗 */
+.ds-style-bold .ds-styled-content {
+  font-weight: 700;
+}
+
+/* 斜体 */
+.ds-style-italic .ds-styled-content {
+  font-style: italic;
+}
+
+/* 半透明：始终可见，压低存在感 */
+.ds-style-fade .ds-styled-content {
+  opacity: 0.6;
+}
+
+/* ============================================================
+   如何新增预设
+   ============================================================
+
+   1. 新增一个 .ds-style-{name} 类
+   2. 仅修改 .ds-styled-content 的视觉属性
+   3. 不要在此文件中修改布局/尺寸 —— 那是基础结构的事
+   4. 保持每个预设只做一件事（SRP）
+
+   示例 —— 新增"卡片底色"预设：
+   .ds-style-card .ds-styled-content {
+     background: var(--ds-paper);
+     border-radius: var(--ds-r-sm);
+     padding: 0.4em 0.6em;
+   }
+   ============================================================ */

@@ -1,6 +1,5 @@
 # MyUI Design System
-
-从 [Parallel-Translation](https://github.com/Teeeeeeeerry/Parallel-Translation) 浏览器扩展中提取的通用设计模板。
+通用设计模板。
 
 ## 设计理念
 

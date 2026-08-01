@@ -1,0 +1,104 @@
+/* ============================================================
+   Typography — 字体选用
+   整个设计系统的字体与字号唯一真相源。
+
+   字体策略：
+   - 等宽字用于：标签、按钮、标题、数据、导航
+   - 系统字用于：正文、描述、通知、长句
+   - 不引入 Web Font（零外部依赖，首屏无 FOIT/FOUT）
+
+   依赖：无。本文件可独立引入。
+   ============================================================ */
+
+:root {
+  /* ==========================================================
+     字体族
+     ========================================================== */
+
+  /* 等宽 —— 标签、数字、按钮、标题、导航 */
+  --ds-font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+
+  /* 无衬线系统字 —— 正文、描述、通知、长句 */
+  --ds-font-ui:   system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* ==========================================================
+     字号阶梯
+     7 档，覆盖标签到标题。
+     不在此阶梯中的尺寸说明设计需要收敛 —— 回到阶梯中选最接近的。
+     ========================================================== */
+
+  --ds-text-2xs:  7px;   /* 标签、徽章、overline */
+  --ds-text-xs:   8px;   /* 页脚、辅助信息 */
+  --ds-text-sm:  10px;   /* 次级正文、placeholder */
+  --ds-text-base: 11px;  /* 正文、选项标签 */
+  --ds-text-md:  13px;   /* 强调正文、toast */
+  --ds-text-lg:  14px;   /* 标题、面板名 */
+  --ds-text-xl:  16px;   /* 大标题、Logo */
+
+  /* ==========================================================
+     字重
+     ========================================================== */
+
+  --ds-weight-normal: 400;
+  --ds-weight-bold:   700;
+
+  /* ==========================================================
+     字距
+     ========================================================== */
+
+  --ds-tracking-tight:  -.02em;  /* 大标题 */
+  --ds-tracking-normal:  0;      /* 正文 */
+  --ds-tracking-wide:    .1em;   /* 按钮 */
+  --ds-tracking-wider:   .18em;  /* 页脚 */
+  --ds-tracking-widest:  .2em;   /* 标签、overline */
+}
+
+/* ==========================================================
+   排版基类（可选 —— 不强制使用，组件中可按需组合）
+   ========================================================== */
+
+/* 标签风格：全大写、宽字距、小字号、等宽加粗 */
+.ds-text-label {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-text-2xs);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-widest);
+  text-transform: uppercase;
+}
+
+/* 正文风格：系统字、常规字重、正常字距 */
+.ds-text-body {
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-base);
+  font-weight: var(--ds-weight-normal);
+  letter-spacing: var(--ds-tracking-normal);
+  line-height: 1.5;
+}
+
+/* 标题风格：等宽、加粗、收紧字距 */
+.ds-text-heading {
+  font-family: var(--ds-font-mono);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: var(--ds-tracking-tight);
+}
+
+/* ==========================================================
+   使用示例
+   ==========================================================
+
+   正确 —— 用 token：
+     font-family: var(--ds-font-mono);
+     font-size: var(--ds-text-sm);
+
+   或直接用排版基类：
+     <span class="ds-text-label">SETTINGS</span>
+
+   错误 —— 裸值：
+     font-family: 'JetBrains Mono', monospace;
+     font-size: 10px;
+
+   新增字号的流程：
+     1. 确认现有 7 档无一适用
+     2. 在阶梯中找到插入位置
+     3. 检查所有引用旧档位的地方是否需要迁移
+   ========================================================== */

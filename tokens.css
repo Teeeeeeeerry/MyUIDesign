@@ -4,7 +4,8 @@
 
    分层：
      forest-green-colors.css → 配色系统（色板 + 透明度阶）
-                               可换成 ember-sunset-colors.css，两者互斥、只引一个
+                               可换成 ember-sunset-colors.css / harbor-blush-colors.css
+                               各配色文件互斥，只引一个
      typography.css → 字体选用（字体族 + 字号阶梯 + 字重/字距）
      tokens.css     → 本文件（圆角 + 间距 + 动画，聚合入口）
 

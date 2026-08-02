@@ -13,7 +13,8 @@
 
 ```
 MyUIDesign/
-├── forest-green-colors.css  # 配色系统 —— 色板 + 透明度阶（可独立使用）
+├── forest-green-colors.css  # 配色系统（默认）—— 色板 + 透明度阶（可独立使用）
+├── ember-sunset-colors.css  # 配色系统（可选）—— 暖橘晚霞主题，与上者二选一
 ├── typography.css     # 字体选用 —— 字体族 + 字号阶梯 + 字重/字距（可独立使用）
 ├── tokens.css         # 设计令牌入口 —— 圆角 + 间距 + 动画，聚合 colors + typography
 ├── components.css     # 可复用 CSS 组件
@@ -68,7 +69,23 @@ MyUIDesign/
 
 ---
 
-## 配色系统 `forest-green-colors.css`
+## 配色系统
+
+配色文件互斥 —— 同一页面只引入一个。`tokens.css` 默认聚合 `forest-green-colors.css`；
+要换成暖橘晚霞主题，把 `tokens.css` 里的 `@import` 换成 `./ember-sunset-colors.css`，
+或跳过 `tokens.css` 直接按需引入。
+
+| 主题 | 文件 | 基调 |
+|------|------|------|
+| Forest Green（默认） | `forest-green-colors.css` | 米白纸感 + 森林绿墨色 |
+| Ember Sunset | `ember-sunset-colors.css` | 暖白象牙 + 深红黑 + 沙金 |
+
+两套文件的透明度阶数完全一致（08/09/15/22/40/55），语义用途一一对应，
+但 token 名不同（`--ds-forest-*` / `--ds-asphalt-*`）—— 换主题需同步改用到的 token 名。
+
+---
+
+## Forest Green `forest-green-colors.css`
 
 ### 主色板
 
@@ -99,6 +116,33 @@ MyUIDesign/
 - Token 名回答"这是什么颜色？"，不回答"这个颜色用来干什么？"
 - 新增颜色前先确认：这个颜色本身叫什么？无法用一个词描述 → 可能是现有 token 的透明度阶变体
 - 换品牌色时：token 名跟着变（森林绿变海军蓝 → `--ds-forest` 变 `--ds-navy`），但组件 CSS 不用改
+
+---
+
+## Ember Sunset `ember-sunset-colors.css`
+
+### 主色板
+
+| Token | 值 | 色样 | 颜色 | Pantone | 典型用法 |
+|-------|-----|------|------|---------|----------|
+| `--ds-asphalt` | `#1c0a0a` | ██ | 沥青黑 | 4975 C | 正文、主按钮、标题 |
+| `--ds-rose` | `#470a08` | ██ | 保加利亚玫瑰 | 4975 C | 深色面板、错误提示 |
+| `--ds-amber` | `#efc88b` | ██ | 殖民地黄 | 155 C | 边框装饰、完成态标记 |
+| `--ds-vanilla` | `#f4e3b2` | ██ | 暖香草 | 7401 C | 高亮块、次级背景 |
+| `--ds-ivory` | `#fff3e9` | ██ | 神馔象牙 | 663 C | 页面/卡片背景 |
+
+### 透明度阶
+
+从 `--ds-asphalt` 派生，阶数与用途和 Forest Green 一一对应。
+
+| Token | 透明度 | 用途 |
+|-------|--------|------|
+| `--ds-asphalt-08` | 8% | 分隔线 |
+| `--ds-asphalt-09` | 9% | 卡片描边 |
+| `--ds-asphalt-15` | 15% | 次级按钮描边、开关关闭态 |
+| `--ds-asphalt-22` | 22% | 输入框描边 |
+| `--ds-asphalt-40` | 40% | 页脚文字、占位符 |
+| `--ds-asphalt-55` | 55% | 次级文字、标签 |
 
 ---
 

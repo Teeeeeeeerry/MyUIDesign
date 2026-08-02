@@ -14,7 +14,8 @@
 ```
 MyUIDesign/
 ├── forest-green-colors.css  # 配色系统（默认）—— 色板 + 透明度阶（可独立使用）
-├── ember-sunset-colors.css  # 配色系统（可选）—— 暖橘晚霞主题，与上者二选一
+├── ember-sunset-colors.css  # 配色系统（可选）—— 暖橘晚霞主题
+├── harbor-blush-colors.css  # 配色系统（可选）—— 海港藕粉主题
 ├── typography.css     # 字体选用 —— 字体族 + 字号阶梯 + 字重/字距（可独立使用）
 ├── tokens.css         # 设计令牌入口 —— 圆角 + 间距 + 动画，聚合 colors + typography
 ├── components.css     # 可复用 CSS 组件
@@ -79,9 +80,10 @@ MyUIDesign/
 |------|------|------|
 | Forest Green（默认） | `forest-green-colors.css` | 米白纸感 + 森林绿墨色 |
 | Ember Sunset | `ember-sunset-colors.css` | 暖白象牙 + 深红黑 + 沙金 |
+| Harbor Blush | `harbor-blush-colors.css` | 雾蓝冷底 + 藕粉暖调 + 藏青 |
 
-两套文件的透明度阶数完全一致（08/09/15/22/40/55），语义用途一一对应，
-但 token 名不同（`--ds-forest-*` / `--ds-asphalt-*`）—— 换主题需同步改用到的 token 名。
+各文件的透明度阶数完全一致（08/09/15/22/40/55），语义用途一一对应，
+但 token 名不同（`--ds-forest-*` / `--ds-asphalt-*` / `--ds-navy-*`）—— 换主题需同步改用到的 token 名。
 
 ---
 
@@ -143,6 +145,34 @@ MyUIDesign/
 | `--ds-asphalt-22` | 22% | 输入框描边 |
 | `--ds-asphalt-40` | 40% | 页脚文字、占位符 |
 | `--ds-asphalt-55` | 55% | 次级文字、标签 |
+
+---
+
+## Harbor Blush `harbor-blush-colors.css`
+
+### 主色板
+
+| Token | 值 | 色样 | 颜色 | 典型用法 |
+|-------|-----|------|------|----------|
+| `--ds-white` | `#ffffff` | ██ | 纯白 | 卡片、弹窗、输入框 |
+| `--ds-mist` | `#e0e8f2` | ██ | 雾蓝 | 页面/面板背景 |
+| `--ds-blush` | `#f1d6d6` | ██ | 藕粉 | 高亮块、次级背景 |
+| `--ds-rose` | `#e39f9f` | ██ | 玫瑰粉 | 强调色、错误提示 |
+| `--ds-steel` | `#8b9bc1` | ██ | 钢蓝 | 边框装饰、次级按钮 |
+| `--ds-navy` | `#35568a` | ██ | 藏青 | 正文、主按钮、标题 |
+
+### 透明度阶
+
+从 `--ds-navy` 派生，阶数与用途和其他主题一一对应。
+
+| Token | 透明度 | 用途 |
+|-------|--------|------|
+| `--ds-navy-08` | 8% | 分隔线 |
+| `--ds-navy-09` | 9% | 卡片描边 |
+| `--ds-navy-15` | 15% | 次级按钮描边、开关关闭态 |
+| `--ds-navy-22` | 22% | 输入框描边 |
+| `--ds-navy-40` | 40% | 页脚文字、占位符 |
+| `--ds-navy-55` | 55% | 次级文字、标签 |
 
 ---
 

@@ -3,7 +3,7 @@
    汇总所有令牌层。组件和页面只引这一个文件即可。
 
    分层：
-     colors.css     → 配色系统（色板 + 透明度阶）
+     forest-green-colors.css → 配色系统（色板 + 透明度阶）
      typography.css → 字体选用（字体族 + 字号阶梯 + 字重/字距）
      tokens.css     → 本文件（圆角 + 间距 + 动画，聚合入口）
 
@@ -12,7 +12,7 @@
    - 新增 token 必须在对应文件中注册
    ============================================================ */
 
-@import './colors.css';
+@import './forest-green-colors.css';
 @import './typography.css';
 
 :root {

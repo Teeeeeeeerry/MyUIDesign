@@ -13,7 +13,7 @@
 
 ```
 MyUIDesign/
-├── colors.css         # 配色系统 —— 色板 + 透明度阶（可独立使用）
+├── forest-green-colors.css  # 配色系统 —— 色板 + 透明度阶（可独立使用）
 ├── typography.css     # 字体选用 —— 字体族 + 字号阶梯 + 字重/字距（可独立使用）
 ├── tokens.css         # 设计令牌入口 —— 圆角 + 间距 + 动画，聚合 colors + typography
 ├── components.css     # 可复用 CSS 组件
@@ -31,7 +31,7 @@ MyUIDesign/
 <link rel="stylesheet" href="tokens.css">
 
 <!-- 或按需引入 -->
-<link rel="stylesheet" href="colors.css">
+<link rel="stylesheet" href="forest-green-colors.css">
 <link rel="stylesheet" href="typography.css">
 ```
 
@@ -68,7 +68,7 @@ MyUIDesign/
 
 ---
 
-## 配色系统 `colors.css`
+## 配色系统 `forest-green-colors.css`
 
 ### 主色板
 

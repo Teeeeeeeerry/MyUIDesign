@@ -16,6 +16,7 @@ MyUIDesign/
 ├── forest-green-colors.css  # 配色系统（默认）—— 色板 + 透明度阶（可独立使用）
 ├── ember-sunset-colors.css  # 配色系统（可选）—— 暖橘晚霞主题
 ├── harbor-blush-colors.css  # 配色系统（可选）—— 海港藕粉主题
+├── verdant-ink-colors.css  # 配色系统（可选）—— 翠墨主题
 ├── typography.css     # 字体选用 —— 字体族 + 字号阶梯 + 字重/字距（可独立使用）
 ├── tokens.css         # 设计令牌入口 —— 圆角 + 间距 + 动画，聚合 colors + typography
 ├── components.css     # 可复用 CSS 组件
@@ -81,6 +82,7 @@ MyUIDesign/
 | Forest Green（默认） | `forest-green-colors.css` | 米白纸感 + 森林绿墨色 |
 | Ember Sunset | `ember-sunset-colors.css` | 暖白象牙 + 深红黑 + 沙金 |
 | Harbor Blush | `harbor-blush-colors.css` | 雾蓝冷底 + 藕粉暖调 + 藏青 |
+| Verdant Ink | `verdant-ink-colors.css` | 陈墨深底 + 荷绿 + 金黄点缀 |
 
 各文件的透明度阶数完全一致（08/09/15/22/40/55），语义用途一一对应，
 但 token 名不同（`--ds-forest-*` / `--ds-asphalt-*` / `--ds-navy-*`）—— 换主题需同步改用到的 token 名。
@@ -173,6 +175,34 @@ MyUIDesign/
 | `--ds-navy-22` | 22% | 输入框描边 |
 | `--ds-navy-40` | 40% | 页脚文字、占位符 |
 | `--ds-navy-55` | 55% | 次级文字、标签 |
+
+---
+
+## Verdant Ink `verdant-ink-colors.css`
+
+### 主色板
+
+| Token | 值 | 色样 | 颜色 | 典型用法 |
+|-------|-----|------|------|----------|
+| `--ds-ink` | `#21221D` | ██ | 陈墨 | 正文、主按钮、标题 |
+| `--ds-lotus` | `#03453E` | ██ | 荷绿 | 链接、强调文字 |
+| `--ds-crimson` | `#81080F` | ██ | 热血 | 错误提示、删除按钮 |
+| `--ds-straw` | `#8C826E` | ██ | 草纸 | 边框装饰、次级背景 |
+| `--ds-stone` | `#B1AFAB` | ██ | 冷灰 | 页面/面板背景 |
+| `--ds-gold` | `#FED802` | ██ | 金黄 | 装饰描边、高亮标记 |
+
+### 透明度阶
+
+从 `--ds-ink` 派生，阶数与用途和其他主题一一对应。
+
+| Token | 透明度 | 用途 |
+|-------|--------|------|
+| `--ds-ink-08` | 8% | 分隔线 |
+| `--ds-ink-09` | 9% | 卡片描边 |
+| `--ds-ink-15` | 15% | 次级按钮描边、开关关闭态 |
+| `--ds-ink-22` | 22% | 输入框描边 |
+| `--ds-ink-40` | 40% | 页脚文字、占位符 |
+| `--ds-ink-55` | 55% | 次级文字、标签 |
 
 ---
 
